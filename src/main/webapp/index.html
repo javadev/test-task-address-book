@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Backbone.js Address book</title>
+  <link rel="stylesheet" href="contacts.css"/>
+</head>
+
+<body>
+
+  <div id="contactapp">
+
+    <header>
+      <h1>Address book</h1>
+      <input id="new-name" type="text" placeholder="Full name"/>
+      <input id="new-phone-number" type="number" placeholder="Phone number"/>
+      <input id="new-date-of-birth" type="date" title="Date of birth"/>
+      <input id="new-address" type="text" placeholder="Address"/>
+      <textarea id="new-description" placeholder="Description"></textarea>
+      <button type="submit">Add</button>
+    </header>
+
+    <section id="main">
+      <input id="toggle-all" type="checkbox">
+      <label for="toggle-all">Mark all as complete</label>
+      <ul id="contact-list"></ul>
+    </section>
+
+    <footer>
+      <a id="clear-completed">Clear completed</a>
+      <div id="contact-count"></div>
+    </footer>
+
+  </div>
+
+  <div id="instructions">
+    Double-click to edit a contact.
+  </div>
+
+  <div id="credits">
+    Created by
+    <br />
+    <a href="http://linkedin.com/in/valyakol">Valentyn Kolesnikov</a>.
+    <br /><a href="https://github.com/javadev/test-task-address-book">AddressBook</a>.
+  </div>
+
+  <script src="lib/json2.js"></script>
+  <script src="lib/jquery-1.7.1.js"></script>
+  <script src="lib/underscore.js"></script>
+  <script src="lib/backbone.js"></script>
+  <script src="contacts.js"></script>
+
+  <!-- Templates -->
+
+  <script type="text/template" id="item-template">
+    <div class="view">
+      <input class="toggle" type="checkbox" <%= done ? 'checked="checked"' : '' %> />
+      <label><%- title %></label>
+      <a class="destroy"></a>
+    </div>
+    <input class="edit" type="text" value="<%- title %>" />
+  </script>
+
+  <script type="text/template" id="stats-template">
+    <% if (done) { %>
+      <a id="clear-completed">Clear <%= done %> completed <%= done == 1 ? 'item' : 'items' %></a>
+    <% } %>
+    <div class="contact-count"><b><%= remaining %></b> <%= remaining == 1 ? 'item' : 'items' %> left</div>
+  </script>
+
+  </body>
+</html>
