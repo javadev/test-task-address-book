@@ -45,7 +45,7 @@ $(function(){
     // Reference to this collection's model.
     model: Contact,
 
-    url: '/contacts',
+    url: '/api/contacts',
 
     // Filter down the list of all contact items that are finished.
     done: function() {
