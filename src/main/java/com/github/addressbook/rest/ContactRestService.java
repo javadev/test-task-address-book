@@ -31,8 +31,7 @@ public class ContactRestService {
     @Produces("application/json")
     public List<Contact> getContacts() {
         Query query = em.createQuery("select c from Contact c");
-        List<Contact> contacts = query.getResultList();
-        return contacts; 
+        return query.getResultList();
     }
 
     @POST
@@ -40,10 +39,8 @@ public class ContactRestService {
     public Response createContact(Contact contact) {
         em.getTransaction().begin();
         em.persist(contact);
-        if (em.getTransaction().isActive()) {
-            em.getTransaction().commit();
-        }
-        String result = "Contact created : " + contact;
+        em.getTransaction().commit();
+        String result = "Contact was created : " + contact;
         return Response.status(201).entity(result).build();        
     }    
 
@@ -53,10 +50,8 @@ public class ContactRestService {
     public Response updateContact(@PathParam("id") Long id, Contact contact) {
         em.getTransaction().begin();
         em.merge(contact);
-        if (em.getTransaction().isActive()) {
-            em.getTransaction().commit();
-        }
-        String result = "Contact updated : " + contact;
+        em.getTransaction().commit();
+        String result = "Contact was updated : " + contact;
         return Response.status(204).entity(result).build();
     }
 
@@ -65,14 +60,11 @@ public class ContactRestService {
     @Produces("application/json")
     public Response deleteContact(@PathParam("id") Long id) {
         em.getTransaction().begin();
-        Query query = em.createQuery("delete from Contact c"
-                + " where c.id = :id");
+        Query query = em.createQuery("delete from Contact c where c.id = :id");
         query.setParameter("id", id);
         query.executeUpdate();
-        if (em.getTransaction().isActive()) {
-            em.getTransaction().commit();
-        }
-        String result = "Contact deleted : " + id;
+        em.getTransaction().commit();
+        String result = "Contact was deleted : " + id;
         return Response.status(204).entity(result).build();
     }
 }

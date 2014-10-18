@@ -160,7 +160,7 @@ $(function(){
 
     // Delegated events for creating new items, and clearing completed ones.
     events: {
-      "keypress #new-contact":  "createOnEnter",
+      "click #new-contact":  "createContact",
       "click #clear-completed": "clearCompleted",
       "click #toggle-all": "toggleAllComplete"
     },
@@ -215,12 +215,11 @@ $(function(){
 
     // If you hit return in the main input field, create new **Contact** model,
     // persisting it to *localStorage*.
-    createOnEnter: function(e) {
-      if (e.keyCode != 13) return;
-      if (!this.input.val()) return;
+    createContact: function(e) {
+      if (!$('#new-name').val()) return;
 
-      Contacts.create({name: this.input.val()});
-      this.input.val('');
+      Contacts.create({name: $('#new-name').val()});
+      $('#new-name').val('');
     },
 
     // Clear all done contact items, destroying their models.
