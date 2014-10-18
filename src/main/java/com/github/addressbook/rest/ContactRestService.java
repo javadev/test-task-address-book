@@ -1,5 +1,11 @@
 package com.github.addressbook.rest;
 
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -10,13 +16,19 @@ import javax.ws.rs.core.Response;
 @Path("/contacts")
 public class ContactRestService {
 
+    private static EntityManager em;
+
+    static {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("contactsDatabase");
+        em = emf.createEntityManager();
+    }
+
     @GET
     @Produces("application/json")
-    public Contact getContacts() {
-        Contact contact = new Contact();
-        contact.setName("iPad 3");
-        contact.setQty(999);        
-        return contact; 
+    public List<Contact> getContacts() {
+        Query query = em.createQuery("select c from Contact c");
+        List<Contact> contacts = query.getResultList();
+        return contacts; 
     }
 
     @POST
@@ -26,4 +38,3 @@ public class ContactRestService {
         return Response.status(201).entity(result).build();        
     }    
 }
-

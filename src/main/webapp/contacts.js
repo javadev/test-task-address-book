@@ -9,22 +9,22 @@ $(function(){
   // Contact Model
   // ----------
 
-  // Our basic **Contact** model has `title`, `order`, and `done` attributes.
+  // Our basic **Contact** model has ``, `order`, and `done` attributes.
   var Contact = Backbone.Model.extend({
 
     // Default attributes for the contact item.
     defaults: function() {
       return {
-        title: "empty contact...",
-        order: Contacts.nextOrder(),
+        name: "empty contact...",
+        id: Contacts.nextOrder(),
         done: false
       };
     },
 
-    // Ensure that each contact created has `title`.
+    // Ensure that each contact created has `name`.
     initialize: function() {
-      if (!this.get("title")) {
-        this.set({"title": this.defaults().title});
+      if (!this.get("name")) {
+        this.set({"name": this.defaults().name});
       }
     },
 
@@ -61,12 +61,12 @@ $(function(){
     // GUID in the database. This generates the next order number for new items.
     nextOrder: function() {
       if (!this.length) return 1;
-      return this.last().get('order') + 1;
+      return this.last().get('id') + 1;
     },
 
     // Contacts are sorted by their original insertion order.
     comparator: function(contact) {
-      return contact.get('order');
+      return contact.get('id');
     }
 
   });
@@ -103,7 +103,7 @@ $(function(){
       this.model.on('destroy', this.remove, this);
     },
 
-    // Re-render the titles of the contact item.
+    // Re-render the names of the contact item.
     render: function() {
       this.$el.html(this.template(this.model.toJSON()));
       this.$el.toggleClass('done', this.model.get('done'));
@@ -128,7 +128,7 @@ $(function(){
       if (!value) {
         this.clear();
       } else {
-        this.model.save({title: value});
+        this.model.save({name: value});
         this.$el.removeClass("editing");
       }
     },
@@ -219,7 +219,7 @@ $(function(){
       if (e.keyCode != 13) return;
       if (!this.input.val()) return;
 
-      Contacts.create({title: this.input.val()});
+      Contacts.create({name: this.input.val()});
       this.input.val('');
     },
 
