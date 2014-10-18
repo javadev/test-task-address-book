@@ -1,6 +1,9 @@
 test-task-address-book
 ======================
 
+[![Build Status](https://secure.travis-ci.org/javadev/test-task-address-book.png)](https://travis-ci.org/javadev/test-task-address-book)
+[![Coverage Status](https://coveralls.io/repos/javadev/test-task-address-book/badge.png?branch=master)](https://coveralls.io/r/javadev/test-task-address-book)
+
 Test task, address book application
 
 Implement a single-page web application “Address Book”. The application should show a list of the contacts (name and phone number). It also should have an ability to see the details of the contacts: full name, phone number, date of birth, address, description(optional) ). User should have an ability to add a new contact, to remove and edit the existing contacts.
@@ -15,4 +18,3 @@ DB: HSQL, PostgreSQL
 Back-end: Spring/JAX-RS(Jersey)
 Front-end: HTML/CSS/JS, (jQuery, Backbone.js or Angular.js)
 Unit testing: jUnit, Mockito
-
