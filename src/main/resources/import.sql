@@ -1,2 +1,2 @@
-insert into contact (id, name) values (1, 'Gavin King')
-insert into contact (id, name) values (2, 'Demo User')
+insert into contact (id, name, done) values (1, 'Gavin King', 0)
+insert into contact (id, name, done) values (2, 'Demo User', 0)

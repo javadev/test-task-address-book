@@ -40,6 +40,7 @@ public class Contact implements Serializable {
     private static final long serialVersionUID =-2032908015L;
     private Long id;
     private String name;
+    private Boolean done;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -60,6 +61,15 @@ public class Contact implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Column(name = "done", columnDefinition = "BIT(1)")
+    public Boolean getDone() {
+        return done;
+    }
+
+    public void setDone(Boolean done) {
+        this.done = done;
     }
 
     @Override
