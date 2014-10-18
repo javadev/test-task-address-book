@@ -8,6 +8,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -45,9 +46,28 @@ public class ContactRestService {
     @Path("/{id}")
     @Consumes("application/json")
     public Response updateContact(@PathParam("id") String id, Contact contact) {
+        em.getTransaction().begin();
         em.merge(contact);
+        if (em.getTransaction().isActive()) {
+            em.getTransaction().commit();
+        }
         String result = "Contact updated : " + contact;
-        return Response.status(201).entity(result).build();
+        return Response.status(204).entity(result).build();
     }
 
+    @DELETE
+    @Path("/{id}")
+    @Produces("application/json")
+    public Response updateContact(@PathParam("id") Long id) {
+        em.getTransaction().begin();
+        Query query = em.createQuery("delete c from Contact c"
+                + " where c.id = :id");
+        query.setParameter("id", id);
+        query.executeUpdate();
+        if (em.getTransaction().isActive()) {
+            em.getTransaction().commit();
+        }
+        String result = "Contact deleted : " + id;
+        return Response.status(204).entity(result).build();
+    }
 }
