@@ -1,8 +1,8 @@
 test-task-address-book
 ======================
 
-[![Build Status](https://secure.travis-ci.org/javadev/test-task-address-book.png)](https://travis-ci.org/javadev/test-task-address-book)
-[![Coverage Status](https://coveralls.io/repos/javadev/test-task-address-book/badge.png?branch=master)](https://coveralls.io/r/javadev/test-task-address-book)
+[![Build Status](https://secure.travis-ci.org/javadev/test-task-address-book.svg)](https://travis-ci.org/javadev/test-task-address-book)
+[![Coverage Status](https://coveralls.io/repos/javadev/test-task-address-book/badge.svg?branch=master)](https://coveralls.io/r/javadev/test-task-address-book)
 
 Test task, address book application
 
